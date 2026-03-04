@@ -80,14 +80,17 @@ const logRoutes = (req, res, next) => {
 
 // 2. express.static() — generates middleware that serves files from the frontend/ folder
 //    Use path.join(__dirname, '../frontend') to construct the absolute path
-const serverIndexHTML = (req, res, next) => {
-  const filePath = path.join(__dirname, '../frontend/index.html');
-  res.sendFile(filePath);
-};
+// const serverIndexHTML = (req, res, next) => {
+//   const filePath = path.join(__dirname, '../frontend/index.html');
+//   res.sendFile(filePath);
+// };
+const filePath = path.join(__dirname, '../frontend');
+const serveStatic = express.static(filePath);
 
-app.get(`/`, serverIndexHTML);
+// app.get(`/`, serverIndexHTML);
 // TODO: Register middleware with app.use() before the controllers
 app.use(logRoutes);
+app.use(serveStatic);
 
 // TODO: Define controllers here
 
